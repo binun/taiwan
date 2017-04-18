@@ -1,0 +1,10 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+auto lo
+iface lo inet loopback
+
+auto virbr0
+iface virbr0 inet dhcp
+        bridge_ports eno1
+        bridge_stp off
+        bridge_fd 0
+        bridge_maxwait 0

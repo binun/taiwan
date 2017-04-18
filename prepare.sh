@@ -1,6 +1,7 @@
 
 apt-get install -y qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils
 # https://linuxconfig.org/simple-virtualization-with-ubuntu-16-04-and-kvm
+# https://askubuntu.com/questions/179508/kvm-bridged-network-not-working
 git clone https://github.com/panda-re/panda.git
 add-apt-repository ppa:phulin/panda
 apt-get -y update

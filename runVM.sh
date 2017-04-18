@@ -3,6 +3,7 @@
 
 #cp *.iso ~/panda/panda/scripts/panda/build/x86_64-softmmu
 
+orig=$(pwd)
 cd ~/panda/panda/scripts/panda/build/x86_64-softmmu
 
 rm -f floppy
@@ -13,9 +14,10 @@ mkfs.ext2 floppy
 
 mkdir /mnt/tmp
 mount -o loop ./floppy /mnt/tmp
-cp syscalls.c /mnt/tmp/
+cp $orig/*.c /mnt/tmp/
+
 umount /mnt/tmp
 
-./qemu-system-x86_64 -net none -cdrom ./tinycore.iso -m 1024 -enable-kvm -monitor stdio -panda "syscalls2" -fda ./floppy
+./qemu-system-x86_64 -net none -cdrom iso/puppy.iso -m 4096 -enable-kvm -monitor stdio -fda ./floppy
 
 # change plugin, run ~/panda/build.sh
