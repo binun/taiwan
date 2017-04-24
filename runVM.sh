@@ -1,23 +1,15 @@
 #!/bin/bash
-# http://reverseengineering.stackexchange.com/questions/4738/using-qemu-monitor-interface-to-extract-execution-traces-from-a-binary
+# https://github.com/panda-re/panda/blob/master/panda/docs/PANDA.md : instructions for https://github.com/moyix/panda
+# /panda/x86_64-softmmu/panda/plugins/syscalls2
 
-#cp *.iso ~/panda/panda/scripts/panda/build/x86_64-softmmu
+ORIG=$(pwd)
+IMG=/var/lib/libvirt/images/fedora20.qcow2
+SRC=./sources
 
-orig=$(pwd)
+virt-copy-in -a $IMG $SRC /root
+
 cd ~/panda/panda/scripts/panda/build/x86_64-softmmu
 
-rm -f floppy
-rm -rf /mnt/tmp
-
-dd if=/dev/zero of=floppy bs=1440K count=1
-mkfs.ext2 floppy
-
-mkdir /mnt/tmp
-mount -o loop ./floppy /mnt/tmp
-cp $orig/*.c /mnt/tmp/
-
-umount /mnt/tmp
-
-./qemu-system-x86_64 -net none -cdrom iso/puppy.iso -m 4096 -enable-kvm -monitor stdio -fda ./floppy
-
 # change plugin, run ~/panda/build.sh
+
+./qemu-system-x86_64 -net none -drive file=$IMG -m 4096 -enable-kvm -monitor stdio
