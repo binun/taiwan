@@ -103,22 +103,24 @@ def requestServer(token,filename):
     # thread = threading.Thread(target=threadFunc,kwargs=dict(sock1=sock))
     # thread.start()
 
-username=sys.argv[1]
-password=sys.argv[2]
+dirr=sys.argv[1]
+#username=sys.argv[1]
+#password=sys.argv[2]
+username="binun"
+password="BW~35wc&"
+
 link_url="http://140.112.107.39:80/"
-maldir="malware"
-bendir="benign"    
 csvdir="csv"   
+
+if not os.path.exists(csvdir):
+    os.makedirs(csvdir)
 
 auth_data={'username':username,'password':password}
 auth_response=requests.post(link_url+"request_token/",auth_data)
 auth_data = auth_response.json()
+print(auth_data)
 token=auth_data['token']
 print("Authenticated")
-if not os.path.exists(csvdir):
-    os.makedirs(csvdir)
 
-#dirr=bendir
-dirr=sys.argv[3]
 for filename in os.listdir(dirr):
     requestServer(token,dirr+"/"+filename)

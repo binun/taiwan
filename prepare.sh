@@ -10,8 +10,8 @@ apt-get build-dep qemu
 apt-get install -y python-pip git protobuf-compiler protobuf-c-compiler \
   libprotobuf-c0-dev libprotoc-dev libelf-dev \
   libcapstone-dev libdwarf-dev python-pycparser llvm-3.3 clang-3.3 libc++-dev
-mkdir -p build-panda && cd build-panda
-~/panda/panda/scripts/install_ubuntu.sh
-ln /root/panda/panda/scripts/panda/build/x86_64-softmmu/qemu-system-x86_64 qemu
+#mkdir -p build-panda && cd build-panda
+#~/panda/panda/scripts/install_ubuntu.sh
+#ln /root/panda/panda/scripts/panda/build/x86_64-softmmu/qemu-system-x86_64 qemu
 
-wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/20/Live/x86_64/Fedora-Live-LXDE-x86_64-20-1.iso -O Fedora.iso 
+#wget https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/20/Live/x86_64/Fedora-Live-LXDE-x86_64-20-1.iso -O Fedora.iso 

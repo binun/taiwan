@@ -1,7 +1,7 @@
 <network>
   <name>macvtap-net</name>
   <forward mode="bridge">
-    <interface dev="enp10s0"/>
+    <interface dev="eno1"/>
   </forward>
 </network>
 
