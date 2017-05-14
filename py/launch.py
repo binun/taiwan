@@ -118,6 +118,7 @@ print("Authenticated")
 if not os.path.exists(csvdir):
     os.makedirs(csvdir)
 
-dirr=bendir
+#dirr=bendir
+dirr=sys.argv[3]
 for filename in os.listdir(dirr):
     requestServer(token,dirr+"/"+filename)
