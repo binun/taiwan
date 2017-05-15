@@ -8,7 +8,7 @@ make install
 
 pip3.6 install requests
 python3.6 -m pip install beautifulsoup4
-# unrar x -r
-#https://forum.tuts4you.com/topic/28114-live-malware-samples/
-# trojan win32 malware download
-# http://malwaredb.malekal.com/
+
+unalias python
+ls -al $(which python)
+ln -f -v /usr/local/bin/python3.6 /usr/bin/python
