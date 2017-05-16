@@ -46,7 +46,7 @@ def requestServer(token,filename):
     sha_token={"SHA256":sha}
     hooklog_response=requests.post(link_url+"get_hooklog/",headers={'Authorization': 'Token {}'.format(token)},data=sha_token)
     hooklog_data=hooklog_response.json()
-
+    print(hooklog_data)
     if 'hooklog' in hooklog_data:
         hooklog=hooklog_data['hooklog']
         b64=hooklog[0]['hooklog']
