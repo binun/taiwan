@@ -7,12 +7,13 @@ from bs4 import BeautifulSoup
 import re
 
 def callback(targetfile,msg):
-    l=re.split("[ \n]+",msg)
-    l1=list(filter(None,l))
-    myString = ",".join(l1)
-    f = open(targetfile, 'at')
-    f.write(myString+"\n")
-    f.close()
+	msg=msg.replace(",", "")
+	l=re.split("[ \n]+",msg)
+	l1=list(filter(None,l))
+	myString = ",".join(l1)
+	f = open(targetfile, 'at')
+	f.write(myString+"\n")
+	f.close()
 
 def parseResponse(resp,callback,targetfile):
     startIndex=resp.find("#")
@@ -28,12 +29,19 @@ def parseResponse(resp,callback,targetfile):
         callback(targetfile,fragment)
         resp=resp[endIndex+1:]
 
-def processExe(exefile,log):
+def processExe(exefile,soup):
     base = os.path.splitext(exefile)[0]
     fn=os.path.splitext(exefile)[0]+".csv"
     path, file = os.path.split(fn)
     target = os.path.join("csv",file)
-    parseResponse(log,callback,target)
+    parseResponse(soup.get_text(),callback,target)
+    
+    hfn=os.path.splitext(exefile)[0]+".hooklog"
+    pathr, filer = os.path.split(hfn)
+    targetr = os.path.join("csv",filer)
+    f = open(targetr, 'wt')
+    f.write(str(soup))
+    f.close()
 
 def requestServer(token,filename):
     file_to_upload=open(filename, mode='rb')
@@ -46,14 +54,13 @@ def requestServer(token,filename):
     sha_token={"SHA256":sha}
     hooklog_response=requests.post(link_url+"get_hooklog/",headers={'Authorization': 'Token {}'.format(token)},data=sha_token)
     hooklog_data=hooklog_response.json()
-    print(hooklog_data)
+    #print(hooklog_data)
     if 'hooklog' in hooklog_data:
         hooklog=hooklog_data['hooklog']
         b64=hooklog[0]['hooklog']
         htm=base64.b64decode(b64)
         soup = BeautifulSoup(htm)
-        log=soup.get_text()
-        processExe(filename,log)
+        processExe(filename,soup)
 
 dirr=sys.argv[1]
 username="binun"
