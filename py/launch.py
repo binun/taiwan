@@ -12,7 +12,7 @@ def callback(targetfile,msg):
 	l1=list(filter(None,l))
 	myString = ",".join(l1)
 	f = open(targetfile, 'at')
-	f.write(myString+"\n")
+	f.write(msg+"\n")
 	f.close()
 
 def parseResponse(resp,callback,targetfile):
@@ -31,17 +31,20 @@ def parseResponse(resp,callback,targetfile):
 
 def processExe(exefile,soup):
     base = os.path.splitext(exefile)[0]
-    fn=os.path.splitext(exefile)[0]+".csv"
+    fn=os.path.splitext(exefile)[0]+".hooklog"
     path, file = os.path.split(fn)
     target = os.path.join("csv",file)
-    parseResponse(soup.get_text(),callback,target)
-    
-    hfn=os.path.splitext(exefile)[0]+".hooklog"
-    pathr, filer = os.path.split(hfn)
-    targetr = os.path.join("csv",filer)
-    f = open(targetr, 'wt')
-    f.write(str(soup))
+    f = open(target, 'wt')
+    f.write(soup.get_text())
     f.close()
+	
+    #parseResponse(soup.get_text(),callback,target)
+    #hfn=os.path.splitext(exefile)[0]+".hooklog"
+    #pathr, filer = os.path.split(hfn)
+    #targetr = os.path.join("csv",filer)
+    #f = open(targetr, 'wt')
+    #f.write(str(soup))
+    #f.close()
 
 def requestServer(token,filename):
     file_to_upload=open(filename, mode='rb')
