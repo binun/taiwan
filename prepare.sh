@@ -18,5 +18,6 @@ apt-get install -y python-pip git protobuf-compiler protobuf-c-compiler \
 # https://events.linuxfoundation.org/images/stories/pdf/lcjp2012_guangrong.pdf
 # https://psuriset.com/2015/07/09/trace-system-calls-using-perf/
 # https://ruinedsec.wordpress.com/2013/04/04/modifying-system-calls-dispatching-linux/
-#https://ruinedsec.wordpress.com/2013/04/04/modifying-system-calls-dispatching-linux/
+# https://ruinedsec.wordpress.com/2013/04/04/modifying-system-calls-dispatching-linux/
 # PTRACE https://home.in.tum.de/~jelten/dynamic-syscall-translation.pdf https://arxiv.org/pdf/1703.02698.pdf
+# https://sourceware.org/systemtap/examples/#virtualization/
